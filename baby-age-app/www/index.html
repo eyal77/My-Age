@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>הגיל שלי 🌸</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Floating decorations -->
+  <div class="decoration" id="deco1">⭐</div>
+  <div class="decoration" id="deco2">🌸</div>
+  <div class="decoration" id="deco3">✨</div>
+  <div class="decoration" id="deco4">💖</div>
+  <div class="decoration" id="deco5">🌟</div>
+  <div class="decoration" id="deco6">🦋</div>
+  <div class="decoration" id="deco7">🌺</div>
+  <div class="decoration" id="deco8">💫</div>
+
+  <!-- ===== MAIN SCREEN ===== -->
+  <div id="mainScreen" class="screen hidden">
+    <div class="main-container">
+      <div class="avatar-wrapper">
+        <div class="avatar-ring" id="avatarRing">
+          <div class="avatar" id="avatar">👧</div>
+          <img class="avatar-photo hidden" id="avatarPhoto" alt="תמונה" />
+        </div>
+        <div class="sparkle-ring"></div>
+      </div>
+
+      <h1 class="greeting" id="greeting">שלום!</h1>
+
+      <div class="age-card">
+        <div class="age-card-inner">
+          <p class="age-label">הגיל שלי היום</p>
+          <div class="age-display" id="ageDisplay">
+            <span class="age-text" id="ageText">מחשב...</span>
+          </div>
+          <div class="birthday-row">
+            <span class="birthday-icon">🎂</span>
+            <span class="birthday-date" id="birthdayDate"></span>
+            <span class="birthday-name" id="birthdayName"></span>
+          </div>
+        </div>
+        <div class="card-glow"></div>
+      </div>
+
+      <button class="speak-btn" id="speakBtn" onclick="speakAge()">
+        <span class="speak-icon" id="speakIcon">🔊</span>
+        <span>הקריאי לי!</span>
+      </button>
+
+      <div class="next-birthday-card" id="nextBirthdayCard">
+        <span class="next-bday-icon">🎉</span>
+        <span class="next-bday-text" id="nextBirthdayText"></span>
+      </div>
+
+      <button class="settings-btn" id="openSettingsBtn" onclick="showSettings()">
+        <span>⚙️</span> שנה תאריך לידה
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== SETTINGS SCREEN ===== -->
+  <div id="settingsScreen" class="screen">
+    <div class="settings-container">
+      <div class="settings-header">
+        <div class="settings-emoji">🌈</div>
+        <h1 class="settings-title">ברוכה הבאה!</h1>
+        <p class="settings-subtitle">הכנסי את הפרטים שלך 🎂</p>
+
+        <!-- Photo picker -->
+        <div class="photo-picker-wrap">
+          <div class="photo-preview" id="photoPreview">
+            <span class="photo-placeholder" id="photoPlaceholder">👧</span>
+            <img class="photo-img hidden" id="photoPreviewImg" alt="תמונה" />
+          </div>
+          <label class="photo-btn" for="photoInput">
+            📷 בחרי תמונה
+          </label>
+          <input type="file" id="photoInput" accept="image/*" class="hidden-input" onchange="handlePhoto(event)" />
+          <button class="photo-remove-btn hidden" id="photoRemoveBtn" onclick="removePhoto()">הסר תמונה ×</button>
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <label class="input-label" for="nameInput">👧 שם</label>
+        <div class="input-group">
+          <input
+            type="text"
+            id="nameInput"
+            class="birthday-input name-input"
+            placeholder="למשל: נועה"
+            maxlength="20"
+            autocomplete="off"
+          />
+          <span class="input-icon">✨</span>
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <label class="input-label" for="birthdayInput">תאריך לידה</label>
+        <div class="input-group">
+          <input
+            type="text"
+            id="birthdayInput"
+            class="birthday-input"
+            placeholder="DD/MM/YYYY"
+            maxlength="10"
+            inputmode="numeric"
+            autocomplete="off"
+          />
+          <span class="input-icon">📅</span>
+        </div>
+        <p class="input-hint">לדוגמה: 15/03/2019</p>
+        <p class="input-error hidden" id="inputError">⚠️ תאריך לא תקין, נסי שוב</p>
+      </div>
+
+      <div class="input-wrapper">
+        <label class="input-label">🎤 בחירת קול</label>
+        <div class="pitch-row">
+          <button type="button" class="pitch-btn" data-pitch="0.75" onclick="selectPitch(this)">
+            👨 קול גבר
+          </button>
+          <button type="button" class="pitch-btn active" data-pitch="1.0" onclick="selectPitch(this)">
+            👩 קול אישה
+          </button>
+        </div>
+      </div>
+
+      <button class="save-btn" id="saveBtn" onclick="saveBirthday()">
+        <span>💖</span> בואי נראה!
+      </button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "appId": "com.mydaughter.age",
+  "appName": "הגיל שלי",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true,
+    "backgroundColor": "#FFF0F5"
+  }
+}
