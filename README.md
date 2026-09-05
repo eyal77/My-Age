@@ -74,21 +74,63 @@ My-Age/
 
 ---
 
-### 📱 הרצה וקימפול לאנדרואיד (Capacitor)
+### 📱 בנייה והתקנה על מכשיר אנדרואיד (Android Build & Install)
 
-1. סנכרון קבצי ה-Web לפרויקט האנדרואיד:
-   ```bash
-   cd baby-age-app
-   npx cap copy
-   npx cap sync
-   ```
+ניתן לבנות ולהתקין את קובץ ה-APK בשתי דרכים עיקריות: דרך **Android Studio** (ממשק גרפי) או ישירות מ**שורת הפקודה (CLI)**.
 
-2. פתיחת הפרויקט ב-Android Studio:
+---
+
+#### 🛠️ שלב 1: סנכרון קבצי ה-Web לפרויקט האנדרואיד
+בכל פעם שמבצעים שינויים בקבצים שבתיקיית `www`, יש לעדכן את פרויקט ה-Native:
+```bash
+cd baby-age-app
+npx cap copy
+npx cap sync
+```
+
+---
+
+#### 🔨 שלב 2: בניית קובץ ה-APK (Build APK)
+
+##### אפשרות א': בנייה דרך Android Studio (מומלץ ופשוט)
+1. פתחו את פרויקט האנדרואיד ב-Android Studio:
    ```bash
    npx cap open android
    ```
+2. בתפריט העליון לחצו על:  
+   **`Build`** ➔ **`Build Bundle(s) / APK(s)`** ➔ **`Build APK(s)`**
+3. בסיום הבנייה, תקפוץ הודעה בפינה הימנית-תחתונה. לחצו על **`locate`** כדי לפתוח את התיקייה שבה נוצר הקובץ (`app-debug.apk`).
 
-3. מתוך Android Studio ניתן להריץ ישירות על מכשיר מחובר או לבנות קובץ APK / AAB.
+##### אפשרות ב': בנייה דרך שורת הפקודה (Terminal / Gradle)
+בשורת הפקודה (PowerShell / CMD ב-Windows):
+```bash
+cd baby-age-app/android
+.\gradlew assembleDebug
+```
+*(ב-Linux / Mac יש להריץ: `./gradlew assembleDebug`)*
+
+📌 **מיקום הקובץ שנוצר:**  
+`baby-age-app/android/app/build/outputs/apk/debug/app-debug.apk`
+
+---
+
+#### 📲 שלב 3: התקנת ה-APK במכשיר אנדרואיד (Install on Device)
+
+##### שיטה 1: העברה ישירה למכשיר (הכי מהיר למשתמשים)
+1. העבירו את הקובץ `app-debug.apk` לטלפון הנייד (דרך WhatsApp, Telegram, Google Drive, שליחה במייל לעצמכם, או חיבור כבל USB).
+2. פתחו את הקובץ בטלפון ולחצו על **התקן (Install)**.
+3. *הערה:* אם המערכת מתריעה על "התקנה ממקורות לא מוכרים" (Install from Unknown Sources), יש לאשר את ההרשאה בהגדרות המכשיר עבור מנהל הקבצים/האפליקציה שממנה פתחתם את הקובץ.
+
+##### שיטה 2: התקנה מהירה באמצעות ADB (למפתחים)
+1. חברו את הטלפון למחשב באמצעות כבל USB וודאו ש-**USB Debugging (ניפוי שגיאות)** מופעל בהגדרות המפתחים.
+2. הריצו בטרמינל:
+   ```bash
+   adb install -r baby-age-app/android/app/build/outputs/apk/debug/app-debug.apk
+   ```
+
+##### שיטה 3: הרצה ישירה מתוך Android Studio
+1. חברו את המכשיר ב-USB או הפעילו Emulator.
+2. לחצו על כפתור ה-Play הירוק **Run 'app'** (`Shift + F10`) ב-Android Studio. האפליקציה תיבנה ותותקן ישירות במכשיר.
 
 ---
 
